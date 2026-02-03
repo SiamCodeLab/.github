@@ -1,841 +1,1051 @@
-<!DOCTYPE html>
+<!doctype html>
 <html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>TechFlow Solutions - Software Services</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Siam CodeLab - Software Services</title>
+    <link
+      rel="stylesheet"
+      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
+    />
     <style>
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
 
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
-            line-height: 1.6;
-            color: #333;
-            background: #fff;
-            overflow-x: hidden;
-        }
+      body {
+        font-family:
+          -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto,
+          "Helvetica Neue", Arial, sans-serif;
+        line-height: 1.6;
+        color: #333;
+        background: #fff;
+        overflow-x: hidden;
+      }
 
-        .container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 20px;
-        }
+      .container {
+        max-width: 1200px;
+        margin: 0 auto;
+        padding: 0 20px;
+      }
 
-        /* Header */
-        header {
-            background: #fff;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-        }
+      /* Header */
+      header {
+        background: #fff;
+        box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        position: sticky;
+        top: 0;
+        z-index: 1000;
+      }
 
-        nav {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            padding: 1.5rem 0;
-        }
+      nav {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.5rem 0;
+      }
 
-        .logo {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #2563eb;
-        }
+      .logo {
+        font-size: 1.5rem;
+        font-weight: 700;
+        color: #2563eb;
+      }
 
+      .nav-links {
+        display: flex;
+        gap: 2rem;
+        list-style: none;
+        align-items: center;
+      }
+
+      .nav-links a {
+        text-decoration: none;
+        color: #555;
+        font-weight: 500;
+        transition: color 0.3s;
+      }
+
+      .nav-links a:hover {
+        color: #2563eb;
+      }
+
+      .lang-switch {
+        background: #f3f4f6;
+        border: none;
+        padding: 0.5rem 1rem;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 500;
+        transition: background 0.3s;
+      }
+
+      .lang-switch:hover {
+        background: #e5e7eb;
+      }
+
+      /* Hero Section */
+      .hero {
+        padding: 6rem 0;
+        text-align: center;
+        background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
+        position: relative;
+        overflow: hidden;
+      }
+
+      .hero::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background:
+          radial-gradient(
+            circle at 20% 50%,
+            rgba(37, 99, 235, 0.05) 0%,
+            transparent 50%
+          ),
+          radial-gradient(
+            circle at 80% 80%,
+            rgba(37, 99, 235, 0.05) 0%,
+            transparent 50%
+          );
+        pointer-events: none;
+      }
+
+      .hero-content {
+        position: relative;
+        z-index: 1;
+      }
+
+      .hero h1 {
+        font-size: 3rem;
+        margin-bottom: 1rem;
+        color: #1e293b;
+        animation: fadeInUp 0.8s ease;
+      }
+
+      .hero p {
+        font-size: 1.25rem;
+        color: #64748b;
+        max-width: 600px;
+        margin: 0 auto 2rem;
+        animation: fadeInUp 0.8s ease 0.2s both;
+      }
+
+      @keyframes fadeInUp {
+        from {
+          opacity: 0;
+          transform: translateY(30px);
+        }
+        to {
+          opacity: 1;
+          transform: translateY(0);
+        }
+      }
+
+      @keyframes float {
+        0%,
+        100% {
+          transform: translateY(0px);
+        }
+        50% {
+          transform: translateY(-20px);
+        }
+      }
+
+      .floating-shapes {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        top: 0;
+        left: 0;
+        pointer-events: none;
+      }
+
+      .shape {
+        position: absolute;
+        opacity: 0.1;
+      }
+
+      .shape-1 {
+        width: 100px;
+        height: 100px;
+        background: #2563eb;
+        border-radius: 50%;
+        top: 10%;
+        left: 10%;
+        animation: float 6s ease-in-out infinite;
+      }
+
+      .shape-2 {
+        width: 150px;
+        height: 150px;
+        background: #2563eb;
+        border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
+        top: 60%;
+        right: 10%;
+        animation: float 8s ease-in-out infinite 1s;
+      }
+
+      .shape-3 {
+        width: 80px;
+        height: 80px;
+        background: #2563eb;
+        border-radius: 20px;
+        bottom: 20%;
+        left: 15%;
+        animation: float 7s ease-in-out infinite 0.5s;
+      }
+
+      .cta-button {
+        background: #2563eb;
+        color: #fff;
+        padding: 1rem 2.5rem;
+        border: none;
+        border-radius: 8px;
+        font-size: 1rem;
+        font-weight: 600;
+        cursor: pointer;
+        transition:
+          background 0.3s,
+          transform 0.2s;
+        text-decoration: none;
+        display: inline-block;
+      }
+
+      .cta-button:hover {
+        background: #1d4ed8;
+        transform: translateY(-2px);
+      }
+
+      /* Services Section */
+      .services {
+        padding: 5rem 0;
+      }
+
+      .section-title {
+        text-align: center;
+        font-size: 2.5rem;
+        margin-bottom: 3rem;
+        color: #1e293b;
+      }
+
+      .services-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+        gap: 2rem;
+      }
+
+      .service-card {
+        background: #fff;
+        padding: 2.5rem;
+        border-radius: 12px;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .service-card::before {
+        content: "";
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 4px;
+        background: linear-gradient(90deg, #2563eb, #3b82f6);
+        transform: scaleX(0);
+        transition: transform 0.3s;
+      }
+
+      .service-card:hover::before {
+        transform: scaleX(1);
+      }
+
+      .service-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+      }
+
+      .service-icon {
+        width: 70px;
+        height: 70px;
+        background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
+        border-radius: 16px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        margin-bottom: 1.5rem;
+        transition: transform 0.3s;
+      }
+
+      .service-card:hover .service-icon {
+        transform: scale(1.1) rotate(5deg);
+      }
+
+      .service-icon i {
+        font-size: 2rem;
+        color: #fff;
+      }
+
+      .service-card h3 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+        color: #1e293b;
+      }
+
+      .service-card p {
+        color: #64748b;
+        line-height: 1.7;
+      }
+
+      /* About Section */
+      .about {
+        padding: 5rem 0;
+        background: #f8fafc;
+      }
+
+      .about-content {
+        max-width: 800px;
+        margin: 0 auto;
+        text-align: center;
+      }
+
+      .about-content p {
+        font-size: 1.1rem;
+        color: #64748b;
+        margin-bottom: 1.5rem;
+        line-height: 1.8;
+      }
+
+      /* Stats Section */
+      .stats {
+        padding: 4rem 0;
+        background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
+        color: #fff;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .stats::before {
+        content: "";
+        position: absolute;
+        top: -50%;
+        right: -10%;
+        width: 500px;
+        height: 500px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+      }
+
+      .stats::after {
+        content: "";
+        position: absolute;
+        bottom: -50%;
+        left: -10%;
+        width: 500px;
+        height: 500px;
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 50%;
+      }
+
+      .stats-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 2rem;
+        text-align: center;
+        position: relative;
+        z-index: 1;
+      }
+
+      .stat-item {
+        padding: 1rem;
+      }
+
+      .stat-item h3 {
+        font-size: 3.5rem;
+        margin-bottom: 0.5rem;
+        font-weight: 700;
+        background: linear-gradient(to bottom, #fff, rgba(255, 255, 255, 0.8));
+        -webkit-background-clip: text;
+        -webkit-text-fill-color: transparent;
+        background-clip: text;
+      }
+
+      .stat-item p {
+        font-size: 1.1rem;
+        opacity: 0.9;
+      }
+
+      /* Contact Section */
+      .contact {
+        padding: 5rem 0;
+      }
+
+      .contact-content {
+        max-width: 600px;
+        margin: 0 auto;
+      }
+
+      .contact-info {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        text-align: center;
+      }
+
+      .contact-item {
+        padding: 2rem;
+        background: #f8fafc;
+        border-radius: 12px;
+        transition: transform 0.3s;
+      }
+
+      .contact-item:hover {
+        transform: translateY(-5px);
+      }
+
+      .contact-item i {
+        font-size: 2.5rem;
+        color: #2563eb;
+        margin-bottom: 1rem;
+      }
+
+      .contact-item h3 {
+        margin-bottom: 0.5rem;
+        color: #1e293b;
+      }
+
+      .contact-item p {
+        color: #64748b;
+      }
+
+      /* Projects Section */
+      .projects {
+        padding: 5rem 0;
+        background: #fff;
+      }
+
+      .projects-grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+        gap: 2.5rem;
+        margin-top: 3rem;
+      }
+
+      .project-card {
+        background: #fff;
+        border-radius: 12px;
+        overflow: hidden;
+        box-shadow: 0 4px 6px rgba(0, 0, 0, 0.07);
+        transition:
+          transform 0.3s,
+          box-shadow 0.3s;
+      }
+
+      .project-card:hover {
+        transform: translateY(-10px);
+        box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
+      }
+
+      .project-image {
+        width: 100%;
+        height: 220px;
+        background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        position: relative;
+        overflow: hidden;
+      }
+
+      .project-card:nth-child(2) .project-image {
+        background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+      }
+
+      .project-card:nth-child(3) .project-image {
+        background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+      }
+
+      .project-image i {
+        font-size: 4rem;
+        color: rgba(255, 255, 255, 0.9);
+      }
+
+      .project-content {
+        padding: 2rem;
+      }
+
+      .project-content h3 {
+        font-size: 1.5rem;
+        margin-bottom: 0.75rem;
+        color: #1e293b;
+      }
+
+      .project-content p {
+        color: #64748b;
+        margin-bottom: 1.5rem;
+        line-height: 1.7;
+      }
+
+      .project-tags {
+        display: flex;
+        gap: 0.5rem;
+        flex-wrap: wrap;
+        margin-bottom: 1.5rem;
+      }
+
+      .tag {
+        padding: 0.4rem 0.8rem;
+        background: #f1f5f9;
+        color: #475569;
+        border-radius: 6px;
+        font-size: 0.85rem;
+        font-weight: 500;
+      }
+
+      .project-link {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        color: #2563eb;
+        text-decoration: none;
+        font-weight: 600;
+        transition: gap 0.3s;
+      }
+
+      .project-link:hover {
+        gap: 0.75rem;
+      }
+
+      .project-link i {
+        font-size: 1rem;
+      }
+
+      /* Footer */
+      footer {
+        background: #1e293b;
+        color: #fff;
+        padding: 3rem 0 1.5rem;
+      }
+
+      .footer-content {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+        gap: 2rem;
+        margin-bottom: 2rem;
+      }
+
+      .footer-section h3 {
+        margin-bottom: 1rem;
+        color: #2563eb;
+      }
+
+      .footer-section p,
+      .footer-section a {
+        color: #94a3b8;
+        text-decoration: none;
+        display: block;
+        margin-bottom: 0.5rem;
+      }
+
+      .footer-section a:hover {
+        color: #fff;
+      }
+
+      .footer-bottom {
+        text-align: center;
+        padding-top: 2rem;
+        border-top: 1px solid #334155;
+        color: #94a3b8;
+      }
+
+      /* Mobile Menu */
+      .mobile-menu-btn {
+        display: none;
+        background: none;
+        border: none;
+        font-size: 1.5rem;
+        cursor: pointer;
+      }
+
+      @media (max-width: 768px) {
         .nav-links {
-            display: flex;
-            gap: 2rem;
-            list-style: none;
-            align-items: center;
+          display: none;
+          position: absolute;
+          top: 100%;
+          left: 0;
+          right: 0;
+          background: #fff;
+          flex-direction: column;
+          padding: 1rem;
+          box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
         }
 
-        .nav-links a {
-            text-decoration: none;
-            color: #555;
-            font-weight: 500;
-            transition: color 0.3s;
+        .nav-links.active {
+          display: flex;
         }
 
-        .nav-links a:hover {
-            color: #2563eb;
-        }
-
-        .lang-switch {
-            background: #f3f4f6;
-            border: none;
-            padding: 0.5rem 1rem;
-            border-radius: 6px;
-            cursor: pointer;
-            font-weight: 500;
-            transition: background 0.3s;
-        }
-
-        .lang-switch:hover {
-            background: #e5e7eb;
-        }
-
-        /* Hero Section */
-        .hero {
-            padding: 6rem 0;
-            text-align: center;
-            background: linear-gradient(135deg, #f8fafc 0%, #f1f5f9 100%);
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: 
-                radial-gradient(circle at 20% 50%, rgba(37, 99, 235, 0.05) 0%, transparent 50%),
-                radial-gradient(circle at 80% 80%, rgba(37, 99, 235, 0.05) 0%, transparent 50%);
-            pointer-events: none;
-        }
-
-        .hero-content {
-            position: relative;
-            z-index: 1;
+        .mobile-menu-btn {
+          display: block;
         }
 
         .hero h1 {
-            font-size: 3rem;
-            margin-bottom: 1rem;
-            color: #1e293b;
-            animation: fadeInUp 0.8s ease;
+          font-size: 2rem;
         }
 
         .hero p {
-            font-size: 1.25rem;
-            color: #64748b;
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            animation: fadeInUp 0.8s ease 0.2s both;
-        }
-
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        @keyframes float {
-            0%, 100% {
-                transform: translateY(0px);
-            }
-            50% {
-                transform: translateY(-20px);
-            }
-        }
-
-        .floating-shapes {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            top: 0;
-            left: 0;
-            pointer-events: none;
-        }
-
-        .shape {
-            position: absolute;
-            opacity: 0.1;
-        }
-
-        .shape-1 {
-            width: 100px;
-            height: 100px;
-            background: #2563eb;
-            border-radius: 50%;
-            top: 10%;
-            left: 10%;
-            animation: float 6s ease-in-out infinite;
-        }
-
-        .shape-2 {
-            width: 150px;
-            height: 150px;
-            background: #2563eb;
-            border-radius: 30% 70% 70% 30% / 30% 30% 70% 70%;
-            top: 60%;
-            right: 10%;
-            animation: float 8s ease-in-out infinite 1s;
-        }
-
-        .shape-3 {
-            width: 80px;
-            height: 80px;
-            background: #2563eb;
-            border-radius: 20px;
-            bottom: 20%;
-            left: 15%;
-            animation: float 7s ease-in-out infinite 0.5s;
-        }
-
-        .cta-button {
-            background: #2563eb;
-            color: #fff;
-            padding: 1rem 2.5rem;
-            border: none;
-            border-radius: 8px;
-            font-size: 1rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: background 0.3s, transform 0.2s;
-            text-decoration: none;
-            display: inline-block;
-        }
-
-        .cta-button:hover {
-            background: #1d4ed8;
-            transform: translateY(-2px);
-        }
-
-        /* Services Section */
-        .services {
-            padding: 5rem 0;
+          font-size: 1rem;
         }
 
         .section-title {
-            text-align: center;
-            font-size: 2.5rem;
-            margin-bottom: 3rem;
-            color: #1e293b;
+          font-size: 2rem;
         }
-
-        .services-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 2rem;
-        }
-
-        .service-card {
-            background: #fff;
-            padding: 2.5rem;
-            border-radius: 12px;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
-            transition: transform 0.3s, box-shadow 0.3s;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .service-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: linear-gradient(90deg, #2563eb, #3b82f6);
-            transform: scaleX(0);
-            transition: transform 0.3s;
-        }
-
-        .service-card:hover::before {
-            transform: scaleX(1);
-        }
-
-        .service-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
-        }
-
-        .service-icon {
-            width: 70px;
-            height: 70px;
-            background: linear-gradient(135deg, #2563eb 0%, #3b82f6 100%);
-            border-radius: 16px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin-bottom: 1.5rem;
-            transition: transform 0.3s;
-        }
-
-        .service-card:hover .service-icon {
-            transform: scale(1.1) rotate(5deg);
-        }
-
-        .service-icon i {
-            font-size: 2rem;
-            color: #fff;
-        }
-
-        .service-card h3 {
-            font-size: 1.5rem;
-            margin-bottom: 1rem;
-            color: #1e293b;
-        }
-
-        .service-card p {
-            color: #64748b;
-            line-height: 1.7;
-        }
-
-        /* About Section */
-        .about {
-            padding: 5rem 0;
-            background: #f8fafc;
-        }
-
-        .about-content {
-            max-width: 800px;
-            margin: 0 auto;
-            text-align: center;
-        }
-
-        .about-content p {
-            font-size: 1.1rem;
-            color: #64748b;
-            margin-bottom: 1.5rem;
-            line-height: 1.8;
-        }
-
-        /* Stats Section */
-        .stats {
-            padding: 4rem 0;
-            background: linear-gradient(135deg, #1e40af 0%, #2563eb 100%);
-            color: #fff;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .stats::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -10%;
-            width: 500px;
-            height: 500px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-        }
-
-        .stats::after {
-            content: '';
-            position: absolute;
-            bottom: -50%;
-            left: -10%;
-            width: 500px;
-            height: 500px;
-            background: rgba(255, 255, 255, 0.05);
-            border-radius: 50%;
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: 2rem;
-            text-align: center;
-            position: relative;
-            z-index: 1;
-        }
-
-        .stat-item {
-            padding: 1rem;
-        }
-
-        .stat-item h3 {
-            font-size: 3.5rem;
-            margin-bottom: 0.5rem;
-            font-weight: 700;
-            background: linear-gradient(to bottom, #fff, rgba(255,255,255,0.8));
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .stat-item p {
-            font-size: 1.1rem;
-            opacity: 0.9;
-        }
-
-        /* Contact Section */
-        .contact {
-            padding: 5rem 0;
-        }
-
-        .contact-content {
-            max-width: 600px;
-            margin: 0 auto;
-        }
-
-        .contact-info {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            text-align: center;
-        }
-
-        .contact-item {
-            padding: 2rem;
-            background: #f8fafc;
-            border-radius: 12px;
-            transition: transform 0.3s;
-        }
-
-        .contact-item:hover {
-            transform: translateY(-5px);
-        }
-
-        .contact-item i {
-            font-size: 2.5rem;
-            color: #2563eb;
-            margin-bottom: 1rem;
-        }
-
-        .contact-item h3 {
-            margin-bottom: 0.5rem;
-            color: #1e293b;
-        }
-
-        .contact-item p {
-            color: #64748b;
-        }
-
-        /* Projects Section */
-        .projects {
-            padding: 5rem 0;
-            background: #fff;
-        }
-
-        .projects-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
-            gap: 2.5rem;
-            margin-top: 3rem;
-        }
-
-        .project-card {
-            background: #fff;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 6px rgba(0,0,0,0.07);
-            transition: transform 0.3s, box-shadow 0.3s;
-        }
-
-        .project-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(37, 99, 235, 0.15);
-        }
-
-        .project-image {
-            width: 100%;
-            height: 220px;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .project-card:nth-child(2) .project-image {
-            background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
-        }
-
-        .project-card:nth-child(3) .project-image {
-            background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
-        }
-
-        .project-image i {
-            font-size: 4rem;
-            color: rgba(255, 255, 255, 0.9);
-        }
-
-        .project-content {
-            padding: 2rem;
-        }
-
-        .project-content h3 {
-            font-size: 1.5rem;
-            margin-bottom: 0.75rem;
-            color: #1e293b;
-        }
-
-        .project-content p {
-            color: #64748b;
-            margin-bottom: 1.5rem;
-            line-height: 1.7;
-        }
-
-        .project-tags {
-            display: flex;
-            gap: 0.5rem;
-            flex-wrap: wrap;
-            margin-bottom: 1.5rem;
-        }
-
-        .tag {
-            padding: 0.4rem 0.8rem;
-            background: #f1f5f9;
-            color: #475569;
-            border-radius: 6px;
-            font-size: 0.85rem;
-            font-weight: 500;
-        }
-
-        .project-link {
-            display: inline-flex;
-            align-items: center;
-            gap: 0.5rem;
-            color: #2563eb;
-            text-decoration: none;
-            font-weight: 600;
-            transition: gap 0.3s;
-        }
-
-        .project-link:hover {
-            gap: 0.75rem;
-        }
-
-        .project-link i {
-            font-size: 1rem;
-        }
-
-        /* Footer */
-        footer {
-            background: #1e293b;
-            color: #fff;
-            padding: 3rem 0 1.5rem;
-        }
-
-        .footer-content {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: 2rem;
-            margin-bottom: 2rem;
-        }
-
-        .footer-section h3 {
-            margin-bottom: 1rem;
-            color: #2563eb;
-        }
-
-        .footer-section p,
-        .footer-section a {
-            color: #94a3b8;
-            text-decoration: none;
-            display: block;
-            margin-bottom: 0.5rem;
-        }
-
-        .footer-section a:hover {
-            color: #fff;
-        }
-
-        .footer-bottom {
-            text-align: center;
-            padding-top: 2rem;
-            border-top: 1px solid #334155;
-            color: #94a3b8;
-        }
-
-        /* Mobile Menu */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: absolute;
-                top: 100%;
-                left: 0;
-                right: 0;
-                background: #fff;
-                flex-direction: column;
-                padding: 1rem;
-                box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .mobile-menu-btn {
-                display: block;
-            }
-
-            .hero h1 {
-                font-size: 2rem;
-            }
-
-            .hero p {
-                font-size: 1rem;
-            }
-
-            .section-title {
-                font-size: 2rem;
-            }
-        }
+      }
     </style>
-</head>
-<body>
+  </head>
+  <body>
     <header>
-        <div class="container">
-            <nav>
-                <div class="logo">TechFlow Solutions</div>
-                <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
-                <ul class="nav-links" id="navLinks">
-                    <li><a href="#home" data-en="Home" data-bn="হোম">Home</a></li>
-                    <li><a href="#services" data-en="Services" data-bn="সেবাসমূহ">Services</a></li>
-                    <li><a href="#projects" data-en="Projects" data-bn="প্রকল্পসমূহ">Projects</a></li>
-                    <li><a href="#about" data-en="About" data-bn="আমাদের সম্পর্কে">About</a></li>
-                    <li><a href="#contact" data-en="Contact" data-bn="যোগাযোগ">Contact</a></li>
-                    <li><button class="lang-switch" onclick="toggleLanguage()">বাংলা</button></li>
-                </ul>
-            </nav>
-        </div>
+      <div class="container">
+        <nav>
+          <div class="logo">Siam CodeLab</div>
+          <button class="mobile-menu-btn" onclick="toggleMenu()">☰</button>
+          <ul class="nav-links" id="navLinks">
+            <li><a href="#home" data-en="Home" data-bn="হোম">Home</a></li>
+            <li>
+              <a href="#services" data-en="Services" data-bn="সেবাসমূহ"
+                >Services</a
+              >
+            </li>
+            <li>
+              <a href="#projects" data-en="Projects" data-bn="প্রকল্পসমূহ"
+                >Projects</a
+              >
+            </li>
+            <li>
+              <a href="#about" data-en="About" data-bn="আমাদের সম্পর্কে"
+                >About</a
+              >
+            </li>
+            <li>
+              <a href="#contact" data-en="Contact" data-bn="যোগাযোগ">Contact</a>
+            </li>
+            <li>
+              <button class="lang-switch" onclick="toggleLanguage()">
+                বাংলা
+              </button>
+            </li>
+          </ul>
+        </nav>
+      </div>
     </header>
 
     <section id="home" class="hero">
-        <div class="floating-shapes">
-            <div class="shape shape-1"></div>
-            <div class="shape shape-2"></div>
-            <div class="shape shape-3"></div>
-        </div>
-        <div class="container hero-content">
-            <h1 data-en="Transform Your Business with Cutting-Edge Technology" data-bn="অত্যাধুনিক প্রযুক্তির মাধ্যমে আপনার ব্যবসাকে রূপান্তরিত করুন">Transform Your Business with Cutting-Edge Technology</h1>
-            <p data-en="We deliver innovative software solutions including mobile apps, web development, automation, and AI integration to drive your business forward." data-bn="আমরা মোবাইল অ্যাপ, ওয়েব ডেভেলপমেন্ট, অটোমেশন এবং এআই ইন্টিগ্রেশন সহ উদ্ভাবনী সফটওয়্যার সমাধান প্রদান করি যা আপনার ব্যবসাকে এগিয়ে নিয়ে যায়।">We deliver innovative software solutions including mobile apps, web development, automation, and AI integration to drive your business forward.</p>
-            <a href="#contact" class="cta-button" data-en="Get Started" data-bn="শুরু করুন">Get Started</a>
-        </div>
+      <div class="floating-shapes">
+        <div class="shape shape-1"></div>
+        <div class="shape shape-2"></div>
+        <div class="shape shape-3"></div>
+      </div>
+      <div class="container hero-content">
+        <h1
+          data-en="Transform Your Business with Cutting-Edge Technology"
+          data-bn="অত্যাধুনিক প্রযুক্তির মাধ্যমে আপনার ব্যবসাকে রূপান্তরিত করুন"
+        >
+          Transform Your Business with Cutting-Edge Technology
+        </h1>
+        <p
+          data-en="We deliver innovative software solutions including mobile apps, web development, automation, and AI integration to drive your business forward."
+          data-bn="আমরা মোবাইল অ্যাপ, ওয়েব ডেভেলপমেন্ট, অটোমেশন এবং এআই ইন্টিগ্রেশন সহ উদ্ভাবনী সফটওয়্যার সমাধান প্রদান করি যা আপনার ব্যবসাকে এগিয়ে নিয়ে যায়।"
+        >
+          We deliver innovative software solutions including mobile apps, web
+          development, automation, and AI integration to drive your business
+          forward.
+        </p>
+        <a
+          href="#contact"
+          class="cta-button"
+          data-en="Get Started"
+          data-bn="শুরু করুন"
+          >Get Started</a
+        >
+      </div>
     </section>
 
     <section id="services" class="services">
-        <div class="container">
-            <h2 class="section-title" data-en="Our Services" data-bn="আমাদের সেবাসমূহ">Our Services</h2>
-            <div class="services-grid">
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-mobile-alt"></i>
-                    </div>
-                    <h3 data-en="Mobile App Development" data-bn="মোবাইল অ্যাপ ডেভেলপমেন্ট">Mobile App Development</h3>
-                    <p data-en="Custom iOS and Android applications built with the latest technologies. We create user-friendly, scalable mobile solutions tailored to your business needs." data-bn="সর্বশেষ প্রযুক্তি দিয়ে তৈরি কাস্টম আইওএস এবং অ্যান্ড্রয়েড অ্যাপ্লিকেশন। আমরা আপনার ব্যবসার চাহিদা অনুযায়ী ব্যবহারকারী-বান্ধব, স্কেলেবল মোবাইল সমাধান তৈরি করি।">Custom iOS and Android applications built with the latest technologies. We create user-friendly, scalable mobile solutions tailored to your business needs.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-code"></i>
-                    </div>
-                    <h3 data-en="Web Development" data-bn="ওয়েব ডেভেলপমেন্ট">Web Development</h3>
-                    <p data-en="Responsive, fast, and secure websites and web applications. From e-commerce platforms to corporate websites, we build digital experiences that convert." data-bn="প্রতিক্রিয়াশীল, দ্রুত এবং নিরাপদ ওয়েবসাইট এবং ওয়েব অ্যাপ্লিকেশন। ই-কমার্স প্ল্যাটফর্ম থেকে কর্পোরেট ওয়েবসাইট পর্যন্ত, আমরা ডিজিটাল অভিজ্ঞতা তৈরি করি যা রূপান্তরিত করে।">Responsive, fast, and secure websites and web applications. From e-commerce platforms to corporate websites, we build digital experiences that convert.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-cogs"></i>
-                    </div>
-                    <h3 data-en="Business Automation" data-bn="ব্যবসায়িক অটোমেশন">Business Automation</h3>
-                    <p data-en="Streamline your operations with intelligent automation solutions. Reduce manual work, minimize errors, and increase efficiency across your organization." data-bn="বুদ্ধিমান অটোমেশন সমাধানের মাধ্যমে আপনার কার্যক্রম সহজ করুন। ম্যানুয়াল কাজ কমান, ত্রুটি হ্রাস করুন এবং আপনার প্রতিষ্ঠান জুড়ে দক্ষতা বৃদ্ধি করুন।">Streamline your operations with intelligent automation solutions. Reduce manual work, minimize errors, and increase efficiency across your organization.</p>
-                </div>
-                <div class="service-card">
-                    <div class="service-icon">
-                        <i class="fas fa-brain"></i>
-                    </div>
-                    <h3 data-en="AI Integration" data-bn="এআই ইন্টিগ্রেশন">AI Integration</h3>
-                    <p data-en="Leverage artificial intelligence to gain competitive advantages. We integrate AI capabilities including machine learning, natural language processing, and predictive analytics." data-bn="প্রতিযোগিতামূলক সুবিধা পেতে কৃত্রিম বুদ্ধিমত্তা ব্যবহার করুন। আমরা মেশিন লার্নিং, প্রাকৃতিক ভাষা প্রক্রিয়াকরণ এবং ভবিষ্যদ্বাণীমূলক বিশ্লেষণ সহ এআই ক্ষমতা একীভূত করি।">Leverage artificial intelligence to gain competitive advantages. We integrate AI capabilities including machine learning, natural language processing, and predictive analytics.</p>
-                </div>
+      <div class="container">
+        <h2
+          class="section-title"
+          data-en="Our Services"
+          data-bn="আমাদের সেবাসমূহ"
+        >
+          Our Services
+        </h2>
+        <div class="services-grid">
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-mobile-alt"></i>
             </div>
+            <h3
+              data-en="Mobile App Development"
+              data-bn="মোবাইল অ্যাপ ডেভেলপমেন্ট"
+            >
+              Mobile App Development
+            </h3>
+            <p
+              data-en="Custom iOS and Android applications built with the latest technologies. We create user-friendly, scalable mobile solutions tailored to your business needs."
+              data-bn="সর্বশেষ প্রযুক্তি দিয়ে তৈরি কাস্টম আইওএস এবং অ্যান্ড্রয়েড অ্যাপ্লিকেশন। আমরা আপনার ব্যবসার চাহিদা অনুযায়ী ব্যবহারকারী-বান্ধব, স্কেলেবল মোবাইল সমাধান তৈরি করি।"
+            >
+              Custom iOS and Android applications built with the latest
+              technologies. We create user-friendly, scalable mobile solutions
+              tailored to your business needs.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-code"></i>
+            </div>
+            <h3 data-en="Web Development" data-bn="ওয়েব ডেভেলপমেন্ট">
+              Web Development
+            </h3>
+            <p
+              data-en="Responsive, fast, and secure websites and web applications. From e-commerce platforms to corporate websites, we build digital experiences that convert."
+              data-bn="প্রতিক্রিয়াশীল, দ্রুত এবং নিরাপদ ওয়েবসাইট এবং ওয়েব অ্যাপ্লিকেশন। ই-কমার্স প্ল্যাটফর্ম থেকে কর্পোরেট ওয়েবসাইট পর্যন্ত, আমরা ডিজিটাল অভিজ্ঞতা তৈরি করি যা রূপান্তরিত করে।"
+            >
+              Responsive, fast, and secure websites and web applications. From
+              e-commerce platforms to corporate websites, we build digital
+              experiences that convert.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-cogs"></i>
+            </div>
+            <h3 data-en="Business Automation" data-bn="ব্যবসায়িক অটোমেশন">
+              Business Automation
+            </h3>
+            <p
+              data-en="Streamline your operations with intelligent automation solutions. Reduce manual work, minimize errors, and increase efficiency across your organization."
+              data-bn="বুদ্ধিমান অটোমেশন সমাধানের মাধ্যমে আপনার কার্যক্রম সহজ করুন। ম্যানুয়াল কাজ কমান, ত্রুটি হ্রাস করুন এবং আপনার প্রতিষ্ঠান জুড়ে দক্ষতা বৃদ্ধি করুন।"
+            >
+              Streamline your operations with intelligent automation solutions.
+              Reduce manual work, minimize errors, and increase efficiency
+              across your organization.
+            </p>
+          </div>
+          <div class="service-card">
+            <div class="service-icon">
+              <i class="fas fa-brain"></i>
+            </div>
+            <h3 data-en="AI Integration" data-bn="এআই ইন্টিগ্রেশন">
+              AI Integration
+            </h3>
+            <p
+              data-en="Leverage artificial intelligence to gain competitive advantages. We integrate AI capabilities including machine learning, natural language processing, and predictive analytics."
+              data-bn="প্রতিযোগিতামূলক সুবিধা পেতে কৃত্রিম বুদ্ধিমত্তা ব্যবহার করুন। আমরা মেশিন লার্নিং, প্রাকৃতিক ভাষা প্রক্রিয়াকরণ এবং ভবিষ্যদ্বাণীমূলক বিশ্লেষণ সহ এআই ক্ষমতা একীভূত করি।"
+            >
+              Leverage artificial intelligence to gain competitive advantages.
+              We integrate AI capabilities including machine learning, natural
+              language processing, and predictive analytics.
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
     <section class="stats">
-        <div class="container">
-            <div class="stats-grid">
-                <div class="stat-item">
-                    <h3>150+</h3>
-                    <p data-en="Projects Completed" data-bn="সম্পন্ন প্রকল্প">Projects Completed</p>
-                </div>
-                <div class="stat-item">
-                    <h3>98%</h3>
-                    <p data-en="Client Satisfaction" data-bn="ক্লায়েন্ট সন্তুষ্টি">Client Satisfaction</p>
-                </div>
-                <div class="stat-item">
-                    <h3>50+</h3>
-                    <p data-en="Happy Clients" data-bn="সন্তুষ্ট ক্লায়েন্ট">Happy Clients</p>
-                </div>
-                <div class="stat-item">
-                    <h3>5+</h3>
-                    <p data-en="Years Experience" data-bn="বছরের অভিজ্ঞতা">Years Experience</p>
-                </div>
-            </div>
+      <div class="container">
+        <div class="stats-grid">
+          <div class="stat-item">
+            <h3>50+</h3>
+            <p data-en="Projects Completed" data-bn="সম্পন্ন প্রকল্প">
+              Projects Completed
+            </p>
+          </div>
+          <div class="stat-item">
+            <h3>98%</h3>
+            <p data-en="Client Satisfaction" data-bn="ক্লায়েন্ট সন্তুষ্টি">
+              Client Satisfaction
+            </p>
+          </div>
+          <div class="stat-item">
+            <h3>25+</h3>
+            <p data-en="Happy Clients" data-bn="সন্তুষ্ট ক্লায়েন্ট">
+              Happy Clients
+            </p>
+          </div>
+          <div class="stat-item">
+            <h3>3+</h3>
+            <p data-en="Years Experience" data-bn="বছরের অভিজ্ঞতা">
+              Years Experience
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
     <section id="projects" class="projects">
-        <div class="container">
-            <h2 class="section-title" data-en="Our Recent Projects" data-bn="আমাদের সাম্প্রতিক প্রকল্পসমূহ">Our Recent Projects</h2>
-            <div class="projects-grid">
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-shopping-cart"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 data-en="E-Commerce Platform" data-bn="ই-কমার্স প্ল্যাটফর্ম">E-Commerce Platform</h3>
-                        <p data-en="A full-featured online marketplace with real-time inventory management, secure payment gateway, and advanced analytics dashboard." data-bn="রিয়েল-টাইম ইনভেন্টরি ম্যানেজমেন্ট, নিরাপদ পেমেন্ট গেটওয়ে এবং উন্নত বিশ্লেষণ ড্যাশবোর্ড সহ একটি সম্পূর্ণ বৈশিষ্ট্যযুক্ত অনলাইন মার্কেটপ্লেস।">A full-featured online marketplace with real-time inventory management, secure payment gateway, and advanced analytics dashboard.</p>
-                        <div class="project-tags">
-                            <span class="tag">React</span>
-                            <span class="tag">Node.js</span>
-                            <span class="tag">MongoDB</span>
-                        </div>
-                        <a href="https://example.com/ecommerce" class="project-link" data-en="View Live Project" data-bn="লাইভ প্রকল্প দেখুন">
-                            <span>View Live Project</span>
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-heartbeat"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 data-en="Healthcare Management App" data-bn="হেলথকেয়ার ম্যানেজমেন্ট অ্যাপ">Healthcare Management App</h3>
-                        <p data-en="Mobile application for patient records management, appointment scheduling, and telemedicine consultations with AI-powered diagnosis assistance." data-bn="রোগীর রেকর্ড ম্যানেজমেন্ট, অ্যাপয়েন্টমেন্ট সিডিউলিং এবং এআই-চালিত ডায়াগনোসিস সহায়তা সহ টেলিমেডিসিন পরামর্শের জন্য মোবাইল অ্যাপ্লিকেশন।">Mobile application for patient records management, appointment scheduling, and telemedicine consultations with AI-powered diagnosis assistance.</p>
-                        <div class="project-tags">
-                            <span class="tag">Flutter</span>
-                            <span class="tag">Firebase</span>
-                            <span class="tag">AI/ML</span>
-                        </div>
-                        <a href="https://example.com/healthcare" class="project-link" data-en="View Live Project" data-bn="লাইভ প্রকল্প দেখুন">
-                            <span>View Live Project</span>
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
-
-                <div class="project-card">
-                    <div class="project-image">
-                        <i class="fas fa-robot"></i>
-                    </div>
-                    <div class="project-content">
-                        <h3 data-en="Business Automation Suite" data-bn="ব্যবসায়িক অটোমেশন স্যুট">Business Automation Suite</h3>
-                        <p data-en="Comprehensive automation solution for invoice processing, customer support, and workflow management with integrated AI chatbot." data-bn="ইনভয়েস প্রসেসিং, কাস্টমার সাপোর্ট এবং ওয়ার্কফ্লো ম্যানেজমেন্টের জন্য সমন্বিত এআই চ্যাটবট সহ ব্যাপক অটোমেশন সমাধান।">Comprehensive automation solution for invoice processing, customer support, and workflow management with integrated AI chatbot.</p>
-                        <div class="project-tags">
-                            <span class="tag">Python</span>
-                            <span class="tag">RPA</span>
-                            <span class="tag">NLP</span>
-                        </div>
-                        <a href="https://example.com/automation" class="project-link" data-en="View Live Project" data-bn="লাইভ প্রকল্প দেখুন">
-                            <span>View Live Project</span>
-                            <i class="fas fa-external-link-alt"></i>
-                        </a>
-                    </div>
-                </div>
+      <div class="container">
+        <h2
+          class="section-title"
+          data-en="Our Recent Projects"
+          data-bn="আমাদের সাম্প্রতিক প্রকল্পসমূহ"
+        >
+          Our Recent Projects
+        </h2>
+        <div class="projects-grid">
+          <div class="project-card">
+            <div class="project-image">
+              <i class="fas fa-shopping-cart"></i>
             </div>
+            <div class="project-content">
+              <h3 data-en="E-Commerce Platform" data-bn="ই-কমার্স প্ল্যাটফর্ম">
+                E-Commerce Platform
+              </h3>
+              <p
+                data-en="A full-featured online marketplace with real-time inventory management, secure payment gateway, and advanced analytics dashboard."
+                data-bn="রিয়েল-টাইম ইনভেন্টরি ম্যানেজমেন্ট, নিরাপদ পেমেন্ট গেটওয়ে এবং উন্নত বিশ্লেষণ ড্যাশবোর্ড সহ একটি সম্পূর্ণ বৈশিষ্ট্যযুক্ত অনলাইন মার্কেটপ্লেস।"
+              >
+                A full-featured online marketplace with real-time inventory
+                management, secure payment gateway, and advanced analytics
+                dashboard.
+              </p>
+              <div class="project-tags">
+                <span class="tag">React</span>
+                <span class="tag">Node.js</span>
+                <span class="tag">MongoDB</span>
+              </div>
+              <a
+                href="https://example.com/ecommerce"
+                class="project-link"
+                data-en="View Live Project"
+                data-bn="লাইভ প্রকল্প দেখুন"
+              >
+                <span>View Live Project</span>
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image">
+              <i class="fas fa-heartbeat"></i>
+            </div>
+            <div class="project-content">
+              <h3
+                data-en="Healthcare Management App"
+                data-bn="হেলথকেয়ার ম্যানেজমেন্ট অ্যাপ"
+              >
+                Healthcare Management App
+              </h3>
+              <p
+                data-en="Mobile application for patient records management, appointment scheduling, and telemedicine consultations with AI-powered diagnosis assistance."
+                data-bn="রোগীর রেকর্ড ম্যানেজমেন্ট, অ্যাপয়েন্টমেন্ট সিডিউলিং এবং এআই-চালিত ডায়াগনোসিস সহায়তা সহ টেলিমেডিসিন পরামর্শের জন্য মোবাইল অ্যাপ্লিকেশন।"
+              >
+                Mobile application for patient records management, appointment
+                scheduling, and telemedicine consultations with AI-powered
+                diagnosis assistance.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Flutter</span>
+                <span class="tag">Firebase</span>
+                <span class="tag">AI/ML</span>
+              </div>
+              <a
+                href="https://example.com/healthcare"
+                class="project-link"
+                data-en="View Live Project"
+                data-bn="লাইভ প্রকল্প দেখুন"
+              >
+                <span>View Live Project</span>
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          </div>
+
+          <div class="project-card">
+            <div class="project-image">
+              <i class="fas fa-robot"></i>
+            </div>
+            <div class="project-content">
+              <h3
+                data-en="Business Automation Suite"
+                data-bn="ব্যবসায়িক অটোমেশন স্যুট"
+              >
+                Business Automation Suite
+              </h3>
+              <p
+                data-en="Comprehensive automation solution for invoice processing, customer support, and workflow management with integrated AI chatbot."
+                data-bn="ইনভয়েস প্রসেসিং, কাস্টমার সাপোর্ট এবং ওয়ার্কফ্লো ম্যানেজমেন্টের জন্য সমন্বিত এআই চ্যাটবট সহ ব্যাপক অটোমেশন সমাধান।"
+              >
+                Comprehensive automation solution for invoice processing,
+                customer support, and workflow management with integrated AI
+                chatbot.
+              </p>
+              <div class="project-tags">
+                <span class="tag">Python</span>
+                <span class="tag">RPA</span>
+                <span class="tag">NLP</span>
+              </div>
+              <a
+                href="https://example.com/automation"
+                class="project-link"
+                data-en="View Live Project"
+                data-bn="লাইভ প্রকল্প দেখুন"
+              >
+                <span>View Live Project</span>
+                <i class="fas fa-external-link-alt"></i>
+              </a>
+            </div>
+          </div>
         </div>
+      </div>
     </section>
 
     <section id="about" class="about">
-        <div class="container">
-            <h2 class="section-title" data-en="About Us" data-bn="আমাদের সম্পর্কে">About Us</h2>
-            <div class="about-content">
-                <p data-en="TechFlow Solutions is a leading software development company dedicated to transforming businesses through innovative technology solutions. With a team of experienced developers, designers, and consultants, we bring your digital vision to life." data-bn="TechFlow Solutions একটি নেতৃস্থানীয় সফটওয়্যার ডেভেলপমেন্ট কোম্পানি যা উদ্ভাবনী প্রযুক্তি সমাধানের মাধ্যমে ব্যবসা রূপান্তরে নিবেদিত। অভিজ্ঞ ডেভেলপার, ডিজাইনার এবং পরামর্শদাতাদের একটি দল নিয়ে, আমরা আপনার ডিজিটাল দৃষ্টিভঙ্গি জীবিত করে তুলি।">TechFlow Solutions is a leading software development company dedicated to transforming businesses through innovative technology solutions. With a team of experienced developers, designers, and consultants, we bring your digital vision to life.</p>
-                <p data-en="Our mission is to empower businesses with cutting-edge software that drives growth, efficiency, and innovation. We believe in building long-term partnerships with our clients and delivering solutions that exceed expectations." data-bn="আমাদের লক্ষ্য হল ব্যবসায়গুলিকে অত্যাধুনিক সফটওয়্যার দিয়ে ক্ষমতায়ন করা যা বৃদ্ধি, দক্ষতা এবং উদ্ভাবন চালিত করে। আমরা আমাদের ক্লায়েন্টদের সাথে দীর্ঘমেয়াদী অংশীদারিত্ব তৈরিতে এবং প্রত্যাশা অতিক্রম করে এমন সমাধান প্রদানে বিশ্বাস করি।">Our mission is to empower businesses with cutting-edge software that drives growth, efficiency, and innovation. We believe in building long-term partnerships with our clients and delivering solutions that exceed expectations.</p>
-            </div>
+      <div class="container">
+        <h2 class="section-title" data-en="About Us" data-bn="আমাদের সম্পর্কে">
+          About Us
+        </h2>
+        <div class="about-content">
+          <p
+            data-en="Siam CodeLab is a leading software development company dedicated to transforming businesses through innovative technology solutions. With a team of experienced developers, designers, and consultants, we bring your digital vision to life."
+            data-bn="Siam CodeLab একটি নেতৃস্থানীয় সফটওয়্যার ডেভেলপমেন্ট কোম্পানি যা উদ্ভাবনী প্রযুক্তি সমাধানের মাধ্যমে ব্যবসা রূপান্তরে নিবেদিত। অভিজ্ঞ ডেভেলপার, ডিজাইনার এবং পরামর্শদাতাদের একটি দল নিয়ে, আমরা আপনার ডিজিটাল দৃষ্টিভঙ্গি জীবিত করে তুলি।"
+          >
+            Siam CodeLab is a leading software development company dedicated to
+            transforming businesses through innovative technology solutions.
+            With a team of experienced developers, designers, and consultants,
+            we bring your digital vision to life.
+          </p>
+          <p
+            data-en="Our mission is to empower businesses with cutting-edge software that drives growth, efficiency, and innovation. We believe in building long-term partnerships with our clients and delivering solutions that exceed expectations."
+            data-bn="আমাদের লক্ষ্য হল ব্যবসায়গুলিকে অত্যাধুনিক সফটওয়্যার দিয়ে ক্ষমতায়ন করা যা বৃদ্ধি, দক্ষতা এবং উদ্ভাবন চালিত করে। আমরা আমাদের ক্লায়েন্টদের সাথে দীর্ঘমেয়াদী অংশীদারিত্ব তৈরিতে এবং প্রত্যাশা অতিক্রম করে এমন সমাধান প্রদানে বিশ্বাস করি।"
+          >
+            Our mission is to empower businesses with cutting-edge software that
+            drives growth, efficiency, and innovation. We believe in building
+            long-term partnerships with our clients and delivering solutions
+            that exceed expectations.
+          </p>
         </div>
+      </div>
     </section>
 
     <section id="contact" class="contact">
-        <div class="container">
-            <h2 class="section-title" data-en="Contact Us" data-bn="আমাদের সাথে যোগাযোগ করুন">Contact Us</h2>
-            <div class="contact-info">
-                <div class="contact-item">
-                    <i class="fas fa-envelope"></i>
-                    <h3 data-en="Email" data-bn="ইমেইল">Email</h3>
-                    <p>info@techflow.com</p>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-phone"></i>
-                    <h3 data-en="Phone" data-bn="ফোন">Phone</h3>
-                    <p>+880 1234-567890</p>
-                </div>
-                <div class="contact-item">
-                    <i class="fas fa-map-marker-alt"></i>
-                    <h3 data-en="Location" data-bn="অবস্থান">Location</h3>
-                    <p data-en="Dhaka, Bangladesh" data-bn="ঢাকা, বাংলাদেশ">Dhaka, Bangladesh</p>
-                </div>
-            </div>
+      <div class="container">
+        <h2
+          class="section-title"
+          data-en="Contact Us"
+          data-bn="আমাদের সাথে যোগাযোগ করুন"
+        >
+          Contact Us
+        </h2>
+        <div class="contact-info">
+          <div class="contact-item">
+            <i class="fas fa-envelope"></i>
+            <h3 data-en="Email" data-bn="ইমেইল">Email</h3>
+            <p>soaib.softdev@gmail.com</p>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-phone"></i>
+            <h3 data-en="Phone" data-bn="ফোন">Phone</h3>
+            <p>+880 1682684452</p>
+          </div>
+          <div class="contact-item">
+            <i class="fas fa-map-marker-alt"></i>
+            <h3 data-en="Location" data-bn="অবস্থান">Location</h3>
+            <p data-en="Dhaka, Bangladesh" data-bn="ঢাকা, বাংলাদেশ">
+              Dhaka, Bangladesh
+            </p>
+          </div>
         </div>
+      </div>
     </section>
 
     <footer>
-        <div class="container">
-            <div class="footer-content">
-                <div class="footer-section">
-                    <h3>TechFlow Solutions</h3>
-                    <p data-en="Empowering businesses with innovative software solutions." data-bn="উদ্ভাবনী সফটওয়্যার সমাধান দিয়ে ব্যবসায় ক্ষমতায়ন।">Empowering businesses with innovative software solutions.</p>
-                </div>
-                <div class="footer-section">
-                    <h3 data-en="Quick Links" data-bn="দ্রুত লিংক">Quick Links</h3>
-                    <a href="#home" data-en="Home" data-bn="হোম">Home</a>
-                    <a href="#services" data-en="Services" data-bn="সেবাসমূহ">Services</a>
-                    <a href="#projects" data-en="Projects" data-bn="প্রকল্পসমূহ">Projects</a>
-                    <a href="#about" data-en="About" data-bn="আমাদের সম্পর্কে">About</a>
-                    <a href="#contact" data-en="Contact" data-bn="যোগাযোগ">Contact</a>
-                </div>
-                <div class="footer-section">
-                    <h3 data-en="Contact Info" data-bn="যোগাযোগের তথ্য">Contact Info</h3>
-                    <p>Email: info@techflow.com</p>
-                    <p>Phone: +880 1234-567890</p>
-                    <p data-en="Address: Dhaka, Bangladesh" data-bn="ঠিকানা: ঢাকা, বাংলাদেশ">Address: Dhaka, Bangladesh</p>
-                </div>
-            </div>
-            <div class="footer-bottom">
-                <p data-en="© 2024 TechFlow Solutions. All rights reserved." data-bn="© ২০২৪ TechFlow Solutions। সর্বস্বত্ব সংরক্ষিত।">© 2024 TechFlow Solutions. All rights reserved.</p>
-            </div>
+      <div class="container">
+        <div class="footer-content">
+          <div class="footer-section">
+            <h3>Siam CodeLab</h3>
+            <p
+              data-en="Empowering businesses with innovative software solutions."
+              data-bn="উদ্ভাবনী সফটওয়্যার সমাধান দিয়ে ব্যবসায় ক্ষমতায়ন।"
+            >
+              Empowering businesses with innovative software solutions.
+            </p>
+          </div>
+          <div class="footer-section">
+            <h3 data-en="Quick Links" data-bn="দ্রুত লিংক">Quick Links</h3>
+            <a href="#home" data-en="Home" data-bn="হোম">Home</a>
+            <a href="#services" data-en="Services" data-bn="সেবাসমূহ"
+              >Services</a
+            >
+            <a href="#projects" data-en="Projects" data-bn="প্রকল্পসমূহ"
+              >Projects</a
+            >
+            <a href="#about" data-en="About" data-bn="আমাদের সম্পর্কে">About</a>
+            <a href="#contact" data-en="Contact" data-bn="যোগাযোগ">Contact</a>
+          </div>
+          <div class="footer-section">
+            <h3 data-en="Contact Info" data-bn="যোগাযোগের তথ্য">
+              Contact Info
+            </h3>
+            <p>Email: soaib.softdev@gmail.com</p>
+            <p>Phone: +880 1682684452</p>
+            <p
+              data-en="Address: Dhaka, Bangladesh"
+              data-bn="ঠিকানা: ঢাকা, বাংলাদেশ"
+            >
+              Address: Dhaka, Bangladesh
+            </p>
+          </div>
         </div>
+        <div class="footer-bottom">
+          <p
+            data-en="© 2026 Siam CodeLab. All rights reserved."
+            data-bn="© ২০২৬ Siam CodeLab। সর্বস্বত্ব সংরক্ষিত।"
+          >
+            © 2026 Siam CodeLab. All rights reserved.
+          </p>
+        </div>
+      </div>
     </footer>
 
     <script>
-        let currentLang = 'en';
+      let currentLang = "en";
 
-        function toggleLanguage() {
-            currentLang = currentLang === 'en' ? 'bn' : 'en';
-            const elements = document.querySelectorAll('[data-en][data-bn]');
-            
-            elements.forEach(el => {
-                el.textContent = el.getAttribute(`data-${currentLang}`);
-            });
+      function toggleLanguage() {
+        currentLang = currentLang === "en" ? "bn" : "en";
+        const elements = document.querySelectorAll("[data-en][data-bn]");
 
-            const langBtn = document.querySelector('.lang-switch');
-            langBtn.textContent = currentLang === 'en' ? 'বাংলা' : 'English';
-        }
-
-        function toggleMenu() {
-            const navLinks = document.getElementById('navLinks');
-            navLinks.classList.toggle('active');
-        }
-
-        // Smooth scrolling
-        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
-            anchor.addEventListener('click', function (e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                    // Close mobile menu if open
-                    document.getElementById('navLinks').classList.remove('active');
-                }
-            });
+        elements.forEach((el) => {
+          el.textContent = el.getAttribute(`data-${currentLang}`);
         });
+
+        const langBtn = document.querySelector(".lang-switch");
+        langBtn.textContent = currentLang === "en" ? "বাংলা" : "English";
+      }
+
+      function toggleMenu() {
+        const navLinks = document.getElementById("navLinks");
+        navLinks.classList.toggle("active");
+      }
+
+      // Smooth scrolling
+      document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
+        anchor.addEventListener("click", function (e) {
+          e.preventDefault();
+          const target = document.querySelector(this.getAttribute("href"));
+          if (target) {
+            target.scrollIntoView({ behavior: "smooth", block: "start" });
+            // Close mobile menu if open
+            document.getElementById("navLinks").classList.remove("active");
+          }
+        });
+      });
     </script>
-</body>
+  </body>
 </html>
