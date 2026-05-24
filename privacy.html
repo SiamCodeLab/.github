@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Privacy Policy — Your Portfolio</title>
+  <meta name="description" content="Privacy Policy for the apps and projects built by [Your Name]." />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══ NAV ══════════════════════════════════════════════ -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo">
+          <span class="nav__logo-dot"></span>
+          YourName
+        </a>
+        <div class="nav__links">
+          <a href="index.html#projects" class="nav__link">Projects</a>
+          <a href="index.html#about" class="nav__link">About</a>
+          <a href="index.html#contact" class="nav__link">Contact</a>
+          <a href="index.html#contact" class="nav__cta">Hire Me</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══ HERO ══════════════════════════════════════════════ -->
+  <div class="container">
+    <div class="policy-hero page-enter">
+      <h1 class="policy-hero__title">Privacy Policy</h1>
+      <p style="color:var(--text-muted); margin-top:12px;">Last Updated: June 1, 2025</p>
+    </div>
+  </div>
+
+  <!-- ══ MAIN ══════════════════════════════════════════════ -->
+  <div class="container">
+    <div class="policy-layout">
+
+      <aside class="policy-toc">
+        <p style="font-size:.7rem; font-weight:600; text-transform:uppercase; color:var(--text-subtle); margin-bottom:16px;">Sections</p>
+        <a class="policy-toc__link" href="#overview">Overview</a>
+        <a class="policy-toc__link" href="#data-collection">Data</a>
+        <a class="policy-toc__link" href="#contact">Contact</a>
+      </aside>
+
+      <main class="policy-content">
+        <section class="policy-section" id="overview">
+          <h2>Overview</h2>
+          <p>This policy describes how I handle information in connection with my portfolio and applications.</p>
+          <p>I do not sell your data. I do not collect personal information directly.</p>
+        </section>
+
+        <section class="policy-section" id="data-collection">
+          <h2>Data Collection</h2>
+          <p>I may collect anonymized usage data to improve user experience. This includes browser type, device type, and pages visited.</p>
+        </section>
+
+        <section class="policy-section" id="contact">
+          <h2>Contact</h2>
+          <p>If you have any questions, feel free to reach out at <a href="mailto:hello@yourname.com" style="color:var(--text); text-decoration:underline;">hello@yourname.com</a>.</p>
+        </section>
+      </main>
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__copy">© <span id="year"></span> Your Name.</p>
+        <nav class="footer__links">
+          <a href="index.html#projects" class="footer__link">Projects</a>
+          <a href="index.html#about" class="footer__link">About</a>
+          <a href="index.html#contact" class="footer__link">Contact</a>
+          <a href="privacy.html" class="footer__link">Privacy</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ── Active TOC highlight on scroll ──────────────────────────
+    const sections = document.querySelectorAll('.policy-section');
+    const tocLinks = document.querySelectorAll('.policy-toc__link');
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          const id = entry.target.id;
+          tocLinks.forEach(link => {
+            link.classList.toggle('active', link.getAttribute('href') === `#${id}`);
+          });
+        }
+      });
+    }, { rootMargin: '-20% 0px -70% 0px' });
+
+    sections.forEach(s => observer.observe(s));
+  </script>
+
+</body>
+</html>

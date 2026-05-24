@@ -1,0 +1,218 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Project Details — Your Portfolio</title>
+  <meta name="description" content="" id="meta-desc" />
+  <!-- OG tags will be set dynamically if server-rendered; this is client fallback -->
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+
+  <!-- ══ NAV ══════════════════════════════════════════════ -->
+  <nav class="nav">
+    <div class="container">
+      <div class="nav__inner">
+        <a href="index.html" class="nav__logo">
+          <span class="nav__logo-dot"></span>
+          YourName
+        </a>
+        <div class="nav__links">
+          <a href="index.html#projects" class="nav__link">Projects</a>
+          <a href="index.html#about" class="nav__link">About</a>
+          <a href="index.html#contact" class="nav__link">Contact</a>
+          <a href="index.html#contact" class="nav__cta">Hire Me</a>
+        </div>
+      </div>
+    </div>
+  </nav>
+
+  <!-- ══ PAGE CONTENT (filled by JS) ══════════════════════ -->
+  <div id="page-content">
+    <!-- Loading state -->
+    <div class="container" style="padding:80px 0; text-align:center; color:var(--text-muted);">
+      <p style="font-size:.9rem;">Loading project…</p>
+    </div>
+  </div>
+
+  <!-- ══ LIGHTBOX ══════════════════════════════════════════ -->
+  <div class="lightbox" id="lightbox" role="dialog" aria-modal="true">
+    <div class="lightbox__content">
+      <button class="lightbox__close" id="lb-close" aria-label="Close">✕</button>
+      <img class="lightbox__img" id="lb-img" src="" alt="" />
+    </div>
+  </div>
+
+  <!-- ══ FOOTER ════════════════════════════════════════════ -->
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__inner">
+        <p class="footer__copy">© <span id="year"></span> Your Name.</p>
+        <nav class="footer__links">
+          <a href="index.html#projects" class="footer__link">Projects</a>
+          <a href="index.html#about" class="footer__link">About</a>
+          <a href="index.html#contact" class="footer__link">Contact</a>
+          <a href="privacy.html" class="footer__link">Privacy</a>
+        </nav>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ══ SCRIPTS ═══════════════════════════════════════════ -->
+  <script src="data.js"></script>
+  <script>
+    document.getElementById('year').textContent = new Date().getFullYear();
+
+    // ─── Read slug from URL ───────────────────────────────────
+    const params = new URLSearchParams(window.location.search);
+    const slug   = params.get('slug');
+    const project = PROJECTS.find(p => p.slug === slug);
+
+    // ─── 404 State ────────────────────────────────────────────
+    if (!project) {
+      document.getElementById('page-content').innerHTML = `
+        <div class="container" style="padding:120px 0; text-align:center;">
+          <h2 style="font-size:1.5rem; color:#fff; margin-bottom:12px;">Project Not Found</h2>
+          <a href="index.html" class="btn-action btn-action--primary" style="display:inline-flex;">
+            ← Back to Projects
+          </a>
+        </div>`;
+    } else {
+
+      // ─── Update page title & meta ─────────────────────────────
+      document.title = `${project.title} — Portfolio`;
+      document.getElementById('meta-desc').content = project.shortDesc;
+
+      // ─── Helpers ──────────────────────────────────────────────
+      function buildTechBadge(name) {
+        return `<span class="tech-badge">${name}</span>`;
+      }
+
+      // ─── Sidebar info rows ─────────────────────────────────────
+      const statusLabel = project.status === 'in-progress' ? 'In Progress' : 'Completed';
+      const platforms = [
+        project.playStore && 'Android',
+        project.appStore  && 'iOS',
+        project.liveDemo  && 'Web',
+      ].filter(Boolean).join(', ') || 'N/A';
+
+      // ─── Action buttons ────────────────────────────────────────
+      const actionBtns = [
+        project.liveDemo  && `<a href="${project.liveDemo}" target="_blank" rel="noopener" class="btn-action btn-action--primary">🚀 Live Demo</a>`,
+        project.github    && `<a href="${project.github}" target="_blank" rel="noopener" class="btn-action">GitHub Repo</a>`,
+        project.playStore && `<a href="${project.playStore}" target="_blank" rel="noopener" class="btn-action">Play Store</a>`,
+        project.appStore  && `<a href="${project.appStore}" target="_blank" rel="noopener" class="btn-action">App Store</a>`,
+      ].filter(Boolean).join('');
+
+      // ─── Gallery HTML ──────────────────────────────────────────
+      const galleryHTML = project.gallery.length ? `
+        <div class="gallery-section">
+          <p class="gallery-label">Gallery</p>
+          <div class="gallery-grid">
+            ${project.gallery.map((img, i) => `
+              <div class="gallery-item" onclick="openLightbox(${i})">
+                <img src="${img.url}" alt="${img.alt}" loading="lazy" />
+              </div>`).join('')}
+          </div>
+        </div>` : '';
+
+      // ─── Related projects (same tags) ─────────────────────────
+      const related = PROJECTS
+        .filter(p => p.slug !== project.slug && p.tags.some(t => project.tags.includes(t)))
+        .slice(0, 3);
+
+      const relatedHTML = related.length ? `
+        <section style="padding: 60px 0; border-top: 1px solid var(--border);">
+          <div class="container">
+            <div class="section-header">
+              <span class="section-label">Related Work</span>
+            </div>
+            <div class="projects-grid">
+              ${related.map(p => `
+                <article class="card" onclick="location.href='project.html?slug=${p.slug}'">
+                  <div class="card__thumb">
+                    <img src="${p.thumbnail}" alt="${p.title}" loading="lazy"/>
+                  </div>
+                  <div class="card__body">
+                    <h3 class="card__title">${p.title}</h3>
+                  </div>
+                </article>`).join('')}
+            </div>
+          </div>
+        </section>` : '';
+
+      // ─── Render full page ──────────────────────────────────────
+      document.getElementById('page-content').innerHTML = `
+        <div class="container">
+          <nav class="breadcrumb">
+            <a href="index.html">Projects</a>
+            <span class="breadcrumb__sep">/</span>
+            <span>${project.title}</span>
+          </nav>
+        </div>
+
+        <div class="container">
+          <div class="detail-hero">
+            <div class="detail-thumb-wrap">
+              <img src="${project.thumbnail}" alt="${project.title}" />
+            </div>
+          </div>
+        </div>
+
+        <div class="container">
+          <div class="detail-layout page-enter">
+            <div class="detail-main">
+              <h1 class="detail-title">${project.title}</h1>
+              <p class="detail-short-desc">${project.shortDesc}</p>
+              <div class="detail-actions">
+                ${actionBtns}
+              </div>
+              <div class="detail-desc">
+                ${project.description}
+              </div>
+              ${galleryHTML}
+            </div>
+
+            <aside class="detail-sidebar">
+              <div class="sidebar-card">
+                <p class="sidebar-card__title">Project Info</p>
+                <div class="sidebar-info-row">
+                  <span class="sidebar-info-label">Status</span>
+                  <span>${statusLabel}</span>
+                </div>
+                <div class="sidebar-info-row">
+                  <span class="sidebar-info-label">Platform</span>
+                  <span>${platforms}</span>
+                </div>
+              </div>
+
+              <div class="sidebar-card">
+                <p class="sidebar-card__title">Tech Stack</p>
+                <div class="sidebar-tech">
+                  ${project.techStack.map(buildTechBadge).join('')}
+                </div>
+              </div>
+            </aside>
+          </div>
+        </div>
+        ${relatedHTML}
+      `;
+
+      // ─── Lightbox ──────────────────────────────────────────────
+      const gallery = project.gallery;
+      function openLightbox(i) {
+        document.getElementById('lb-img').src = gallery[i].url;
+        document.getElementById('lightbox').classList.add('open');
+      }
+      function closeLightbox() {
+        document.getElementById('lightbox').classList.remove('open');
+      }
+      document.getElementById('lb-close').onclick = closeLightbox;
+      document.getElementById('lightbox').onclick = e => { if (e.target === e.currentTarget) closeLightbox(); };
+      window.openLightbox = openLightbox;
+    }
+  </script>
+
+</body>
+</html>
